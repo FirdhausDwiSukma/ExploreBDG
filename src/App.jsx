@@ -1,11 +1,14 @@
-import './App.css'
+import './App.css';
 import Header from './components/header'
+import Hero from './components/hero'
 
 function App() {
   return (
     <div>
       <Header title= "ExploreBDG"/>
-        <p>Daftar tempat wisata, kuliner, dan nongkrong</p>
+        <main style={{ paddingTop: "64px" }}>
+            <Hero />
+        </main>
     </div>
   )
 }

@@ -3,9 +3,9 @@
   line-height: 1.5;
   font-weight: 400;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  /* ⬇️ DIUBAH: warna teks default jadi gelap */
+  color: #0f172a;
+  background-color: #ffffff;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -13,28 +13,158 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* LINK */
 a {
   font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+  color: #2563eb;
+  text-decoration: none;
 }
 
+a:hover {
+  color: #1d4ed8;
+}
+
+/* ⬇️ DIUBAH: body TIDAK flex & TIDAK center */
 body {
-  margin: 0;
-  display: flex;
-  place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  background-color: #ffffff;
 }
 
+/* JUDUL */
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
 }
 
+/* ================= HEADER ================= */
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 64px;
+
+  display: flex;
+  align-items: center;
+
+  background-color: #ffffff;
+  padding: 0 32px;
+  z-index: 1000;
+
+  /* estetik */
+  transition: box-shadow 0.3s ease;
+}
+
+/* ⬇️ SHADOW SAAT SCROLL */
+.header.scrolled {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* BRAND / LOGO TEKS */
+.brand {
+  font-size: 8px;    
+  font-weight: 700;
+  color: #0f172a;
+}
+
+/* MENU CENTER */
+nav {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+nav ul {
+  display: flex;
+  list-style: none;
+  gap: 32px;
+}
+
+nav li {
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 500;
+  color: #334155;
+  transition: color 0.2s ease;
+}
+
+nav li:hover {
+  color: #0f172a;
+}
+
+/* ================= HERO SECTION ================= */
+
+.hero {
+  min-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  text-align: center;
+  padding: 0 20px;
+  background-color: #ffffff;
+}
+
+.hero-title {
+  font-size: 48px;
+  font-weight: 800;
+  color: #0f172a;
+  margin-bottom: 16px;
+}
+
+.hero-subtitle {
+  font-size: 18px;
+  color: #475569;
+  max-width: 600px;
+  margin-bottom: 32px;
+}
+
+/* ACTION BUTTON */
+.hero-actions {
+  display: flex;
+  gap: 16px;
+}
+
+.btn-primary {
+  background-color: #2563eb;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 8px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background-color: #1d4ed8;
+}
+
+.btn-secondary {
+  background-color: white;
+  color: #2563eb;
+  padding: 12px 24px;
+  border-radius: 8px;
+  border: 2px solid #2563eb;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-secondary:hover {
+  background-color: #eff6ff;
+}
+
+
+/* BUTTON (tetap dipertahankan) */
 button {
   border-radius: 8px;
   border: 1px solid transparent;
@@ -43,26 +173,24 @@ button {
   font-weight: 500;
   font-family: inherit;
   background-color: #1a1a1a;
+  color: white;
   cursor: pointer;
   transition: border-color 0.25s;
 }
+
 button:hover {
-  border-color: #646cff;
+  border-color: #2563eb;
 }
+
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+/* LIGHT MODE (tetap aman) */
 @media (prefers-color-scheme: light) {
   :root {
-    color: #213547;
+    color: #0f172a;
     background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
   }
 }
