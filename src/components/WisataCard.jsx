@@ -3,9 +3,15 @@ import { useState } from 'react'
 
 function WisataCard({ name, location, rating, image, onClick }) {
     const [isLoaded, setIsLoaded] = useState(false)
+    const [isHovered, setIsHovered] = useState(false)
 
     return (
-        <div className="wisata-card" onClick={onClick}>
+        <div 
+            className={`wisata-card ${isHovered ? 'hovered' : ''}`}
+            onClick={onClick}
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+        >
             <div className="card-image-wrapper">
                 <img
                     src={image}

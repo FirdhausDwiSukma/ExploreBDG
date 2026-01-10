@@ -1,6 +1,6 @@
 import WisataCard from './WisataCard'
 import places from '../data/places'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 
 function WisataSection() {
     // Filter only wisata category
@@ -9,16 +9,23 @@ function WisataSection() {
     // Carousel State
     const [currentIndex, setCurrentIndex] = useState(0)
     const [itemsPerSlide, setItemsPerSlide] = useState(3)
+    const [isMobile, setIsMobile] = useState(false)
+    const viewportRef = useRef(null)
+    const isScrollingRef = useRef(false)
 
     // Responsive items per slide
     useEffect(() => {
         const handleResize = () => {
-            if (window.innerWidth < 640) {
+            const width = window.innerWidth
+            if (width < 640) {
                 setItemsPerSlide(1)
-            } else if (window.innerWidth < 1024) {
+                setIsMobile(true)
+            } else if (width < 1024) {
                 setItemsPerSlide(2)
+                setIsMobile(false)
             } else {
                 setItemsPerSlide(3)
+                setIsMobile(false)
             }
         }
 
@@ -26,6 +33,48 @@ function WisataSection() {
         window.addEventListener('resize', handleResize)
         return () => window.removeEventListener('resize', handleResize)
     }, [])
+
+    // Handle scroll on mobile to update dots
+    useEffect(() => {
+        const viewport = viewportRef.current
+        if (!viewport || !isMobile) return
+
+        const handleScroll = () => {
+            isScrollingRef.current = true
+            
+            const scrollLeft = viewport.scrollLeft
+            const scrollWidth = viewport.scrollWidth
+            const clientWidth = viewport.clientWidth
+            const totalScrollWidth = scrollWidth - clientWidth
+            
+            // Calculate index based on scroll position ratio
+            let newIndex = 0
+            if (totalScrollWidth > 0) {
+                const scrollRatio = scrollLeft / totalScrollWidth
+                newIndex = Math.round(scrollRatio * (wisataPlaces.length - 1))
+            }
+            
+            newIndex = Math.max(0, Math.min(newIndex, wisataPlaces.length - itemsPerSlide))
+            setCurrentIndex(newIndex)
+
+            // Clear flag after a delay
+            setTimeout(() => {
+                isScrollingRef.current = false
+            }, 150)
+        }
+
+        viewport.addEventListener('scroll', handleScroll, { passive: true })
+        return () => viewport.removeEventListener('scroll', handleScroll)
+    }, [isMobile, wisataPlaces.length, itemsPerSlide])
+
+    // Handle dots click to scroll on desktop only
+    useEffect(() => {
+        const viewport = viewportRef.current
+        if (!viewport || isMobile) return  // Only for desktop, not mobile
+
+        // For desktop, no scroll effect needed - carousel uses transform
+        // Dots click is handled by onClick handler
+    }, [isMobile])
 
     const nextSlide = () => {
         setCurrentIndex(prev =>
@@ -39,9 +88,7 @@ function WisataSection() {
         )
     }
 
-    // Calculate translation percentage
-    // 100% / itemsPerSlide calculates the width of one item in percent
-    // currentIndex * (100 / itemsPerSlide) calculates how much to shift
+    // Calculate translation percentage for desktop
     const translateX = -(currentIndex * (100 / itemsPerSlide))
 
     return (
@@ -55,7 +102,7 @@ function WisataSection() {
                 </div>
 
                 <div className="carousel-container">
-                    <div className="carousel-viewport">
+                    <div className="carousel-viewport" ref={viewportRef}>
                         <div className="carousel-track" style={{
                             transform: `translateX(${translateX}%)`,
                             gridTemplateColumns: `repeat(${wisataPlaces.length}, ${100 / itemsPerSlide}%)`
@@ -95,11 +142,11 @@ function WisataSection() {
                     {/* Dots Indicator */}
                     <div className="carousel-dots">
                         {Array.from({ length: Math.ceil((wisataPlaces.length - itemsPerSlide) + 1) }).map((_, idx) => (
-                            /* Show dots only for possible starting positions if we want, or simplify */
                             <button
                                 key={idx}
                                 className={`dot ${currentIndex === idx ? 'active' : ''}`}
-                                onClick={() => setCurrentIndex(idx)}
+                                onClick={() => !isMobile && setCurrentIndex(idx)}
+                                disabled={isMobile}
                                 aria-label={`Go to slide ${idx + 1}`}
                             />
                         ))}
