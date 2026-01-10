@@ -83,6 +83,24 @@ main {
   color: #0f172a;
 } 
 
+/* HAMBURGER BUTTON - hidden on desktop */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.hamburger span {
+  width: 25px;
+  height: 3px;
+  background-color: #0f172a;
+  transition: 0.3s ease;
+}
+
 /* MENU CENTER */
 nav {
   position: absolute;
@@ -144,7 +162,6 @@ nav li:hover {
   margin-bottom: 32px;
 }
 
-/* ACTION BUTTON */
 .hero-actions {
   display: flex;
   gap: 16px;
@@ -226,6 +243,15 @@ nav li:hover {
   color: #ffffff;
 }
 
+/* LOCATION on mobile */
+.hero-location-mobile {
+  display: none;
+  font-size: 16px;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 16px;
+}
+
 /* BUTTON */
 .hero-actions {
   display: flex;
@@ -251,6 +277,7 @@ nav li:hover {
   background-color: #CFF432;
   color: #0f172a;
   border-color: #CFF432;
+  outline: none;
 }
 
 .btn-secondary {
@@ -270,6 +297,7 @@ nav li:hover {
   background-color: #CFF432;
   color: #0f172a;
   border-color: #CFF432;
+  outline: none;
 }
 
 /* BUTTON (tetap dipertahankan) */
@@ -299,7 +327,7 @@ button:focus-visible {
 @media (max-width: 900px) {
   :root { --header-height: 64px; }
   header { padding: 0 24px; }
-  .brand { font-size: 16px; }
+  .brand { font-size: 6px; }
   nav ul { gap: 20px; }
   nav li { font-size: 14px; }
 
@@ -315,28 +343,69 @@ button:focus-visible {
   .hero-left h1 { font-size: 40px; }
   .hero-left p { font-size: 16px; max-width: 100%; }
   .hero-right { display: none; }
+  .hero-location-mobile { display: block; }
 }
 
 @media (max-width: 600px) {
-  :root { --header-height: 56px; }
-  header { padding: 0 16px; }
-  .brand { font-size: 18px; }
-  nav { position: static; left: auto; transform: none; }
-  nav ul { gap: 12px; }
-  nav li { font-size: 13px; }
+  /* header with hamburger menu */
+  :root { --header-height: 60px; }
+  header { 
+    padding: 0 16px; 
+    height: var(--header-height); 
+    flex-direction: row;
+    align-items: center; 
+    justify-content: space-between;
+    gap: 0;
+  }
+  .brand { font-size: 6px; }
+  
+  /* show hamburger button on mobile */
+  .hamburger { display: flex; }
+  
+  /* hide nav by default, show when .nav-open - positioned on RIGHT where hamburger is */
+  nav { 
+    position: fixed;
+    top: var(--header-height);
+    right: 0;
+    left: auto;
+    transform: none; /* Reset transform dari desktop */
+    background-color: #ffffff;
+    width: 200px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    box-shadow: -2px 4px 12px rgba(0, 0, 0, 0.08);
+    border-radius: 0 0 0 12px; /* Rounded corner di kiri bawah */
+  }
+  
+  nav.nav-open { max-height: 200px; }
+  
+  nav ul { 
+    gap: 0;
+    flex-direction: column;
+    padding: 12px 16px;
+    align-items: flex-start;
+  }
+  nav li { 
+    font-size: 14px;
+    padding: 8px 0;
+    width: 100%;
+  }
 
-  .hero { min-height: 70vh; }
+  .hero { min-height: calc(100vh - var(--header-height)); }
   .hero-glass {
     padding: 20px;
     border-radius: 16px;
     gap: 16px;
+    min-height: auto;
   }
 
-  .hero-left h1 { font-size: 32px; }
-  .hero-left p { font-size: 14px; margin-bottom: 16px; }
-  .hero-actions { gap: 12px; flex-wrap: wrap; }
-  .btn-primary, .btn-secondary { padding: 10px 18px; }
+  .hero-left h1 { font-size: 28px; }
+  .hero-left p { font-size: 13px; margin-bottom: 12px; }
+  .hero-actions { gap: 8px; flex-wrap: wrap; justify-content: center; }
+  .btn-primary, .btn-secondary { padding: 8px 14px; font-size: 13px; }
   .hero-right { display: none; }
+  .hero-location-mobile { display: block; font-size: 14px; margin-bottom: 12px; }
 }
 
 /* LIGHT MODE (tetap aman) */

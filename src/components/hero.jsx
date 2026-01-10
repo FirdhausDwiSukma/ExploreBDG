@@ -23,11 +23,16 @@ function Hero() {
                 <div className="hero-glass">
                 {/* KIRI */}
                 <div className="hero-left">
-                <h1>Explore Bandung</h1>
+                    <h1>Explore Bandung</h1>
                     <p>
                         Jelajahi keindahan wisata, kuliner legendaris,
                         dan tempat nongkrong terbaik di Kota Bandung
                     </p>
+
+                    {/* LOCATION - show on mobile above buttons */}
+                    <div className="hero-location-mobile">
+                        <span>📍 Bandung, Jawa Barat</span>
+                    </div>
 
                     <div className="hero-actions">
                         <button className="btn-primary">Wisata</button>
@@ -36,7 +41,7 @@ function Hero() {
                     </div>
                 </div>
 
-                    {/* KANAN */}
+                    {/* KANAN - desktop only */}
                     <div className="hero-right">
                         <span>📍 Bandung, Jawa Barat</span>
                     </div>
