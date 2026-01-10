@@ -6,7 +6,7 @@ function App() {
   return (
     <div>
       <Header title= "ExploreBDG"/>
-        <main style={{ paddingTop: "64px" }}>
+        <main>
             <Hero />
         </main>
     </div>

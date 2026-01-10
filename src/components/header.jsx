@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState } from 'react'
 
 function Header({ title }) {
+    
     const [scrolled, setScrolled] = useState(false)
-
+    // handle scroll
     useEffect(() => {
         const handleScroll = () => {
         setScrolled(window.scrollY > 10)
