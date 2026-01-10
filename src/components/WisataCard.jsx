@@ -1,10 +1,23 @@
 import PropTypes from 'prop-types'
+import { useState } from 'react'
 
-function WisataCard({ name, location, rating, image }) {
+function WisataCard({ name, location, rating, image, onClick }) {
+    const [isLoaded, setIsLoaded] = useState(false)
+
     return (
-        <div className="wisata-card">
+        <div className="wisata-card" onClick={onClick}>
             <div className="card-image-wrapper">
-                <img src={image} alt={name} loading="lazy" />
+                <img
+                    src={image}
+                    alt={name}
+                    loading="lazy"
+                    onLoad={() => setIsLoaded(true)}
+                    style={{
+                        opacity: isLoaded ? 1 : 0,
+                        transition: 'opacity 0.5s ease-in-out'
+                    }}
+                />
+                {!isLoaded && <div className="skeleton-loader" style={{ position: 'absolute', inset: 0, background: '#f0f0f0' }} />}
                 <div className="rating-badge">
                     <span className="star">⭐</span>
                     <span className="rating-value">{rating}</span>

@@ -379,11 +379,163 @@ button:focus-visible {
   margin: 0 auto;
 }
 
-/* Wisata Grid */
-.wisata-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
+/* Carousel Styles */
+.carousel-container {
+  position: relative;
+  width: 100%;
+  max-width: 100%; /* Full Width */
+  margin: 0 auto;
+  padding: 12px 0; /* Remove side padding to go full width */
+}
+
+/* Viewport handles the masking */
+.carousel-viewport {
+  overflow: hidden;
+  width: 100%;
+  padding: 40px 0; /* Huge breathing room for hover & shadow */
+}
+
+.carousel-track {
+  display: flex;
+  transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+  width: 100%;
+}
+
+.carousel-item {
+  flex-shrink: 0;
+  padding: 0 12px;
+  cursor: pointer; /* Explicit pointer cursor for the whole item area */
+}
+
+/* Nav Buttons - Positioned relative to IMAGE height (240px) */
+.nav-button {
+  position: absolute;
+  /* Top padding (40px) + Half Image Height (120px) = 160px */
+  top: 160px; 
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: white;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 20;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  color: #0f172a;
+}
+
+.nav-button:hover:not(:disabled) {
+  background: #0f172a;
+  color: white;
+  border-color: #0f172a;
+  transform: translateY(-50%) scale(1.1);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.nav-button:disabled {
+  opacity: 0; /* Hide completely if disabled for cleaner look, or 0.3 */
+  pointer-events: none;
+}
+
+.nav-button.prev {
+  left: 16px; /* Offset from screen edge */
+}
+
+.nav-button.next {
+  right: 16px; /* Offset from screen edge */
+}
+
+/* Dots Indicator */
+.carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+/* ... existing dot styles ... */
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #cbd5e1;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.3s ease;
+}
+
+.dot.active {
+  background: #0f172a;
+  transform: scale(1.5);
+  width: 24px;
+  border-radius: 12px;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 900px) {
+  .nav-button {
+     /* Mobile/Tablet image might be different size? Styles say 240px fixed for card-image-wrapper */
+     top: 130px; 
+  }
+}
+
+@media (max-width: 600px) {
+  .carousel-container {
+    padding: 0; /* Full edge-to-edge on mobile */
+  }
+
+  /* NATIVE SCROLL MODE FOR MOBILE */
+  .carousel-viewport {
+    overflow-x: auto; /* Enable Scroll */
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory; /* Snap effect */
+    -webkit-overflow-scrolling: touch; /* Smooth scroll iOS */
+    padding-bottom: 20px; /* Hide scrollbar if needed or space */
+    scrollbar-width: none; /* Hide scrollbar Firefox */
+  }
+  
+  .carousel-viewport::-webkit-scrollbar {
+    display: none; /* Hide scrollbar Chrome/Safari */
+  }
+
+  /* Disable Transform logic on mobile, rely on native scroll */
+  .carousel-track {
+    width: auto; /* Let content dictate width */
+    transform: none !important; /* Disable JS transform */
+    padding: 0 16px; /* Start padding */
+    gap: 16px; /* Grid/Flex gap */
+  }
+
+  .carousel-item {
+    scroll-snap-align: center; /* Snap to center */
+    width: 85vw !important; /* Show part of next card peeking */
+    flex-shrink: 0;
+    padding: 0; /* Reset internal padding */
+    margin-right: 16px; /* Spacing between cards */
+  }
+
+  /* Hide buttons completely */
+  .nav-button {
+    display: none;
+  }
+  
+  .card-image-wrapper {
+      height: 200px;
+  }
+  
+  .nav-button {
+      /* Mobile image is 200px, center is ~100px + paddings */
+      top: 150px;
+  }
+  
+  .nav-button.prev { left: 4px; }
+  .nav-button.next { right: 4px; }
 }
 
 /* Wisata Card */
@@ -563,7 +715,18 @@ button:focus-visible {
   .hero-location-mobile { display: block; font-size: 14px; margin-bottom: 12px; }
 
   /* Wisata section mobile */
-  .wisata-section { padding: 40px 16px; }
+  .wisata-section { 
+    padding: 40px 0; /* Remove horizontal padding for full width */
+  }
+  
+  .section-title, .section-desc {
+    padding: 0 16px; /* Restore padding for text */
+  }
+
+  .carousel-dots {
+    padding: 0 16px;
+  }
+  
   .section-title { font-size: 24px; }
   .section-desc { font-size: 14px; }
   .wisata-grid { grid-template-columns: 1fr; gap: 16px; }

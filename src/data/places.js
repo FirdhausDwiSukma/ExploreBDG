@@ -1,10 +1,10 @@
-// Import wisata images
-import tangkubanPerahu from '../assets/images/wisata/tangkuban-perahu.jpg'
-import kawahPutih from '../assets/images/wisata/kawah-putih.jpg'
-import farmHouse from '../assets/images/wisata/farm-house.jpg'
-import floatingMarket from '../assets/images/wisata/floating-market.jpg'
-import tebingKeraton from '../assets/images/wisata/tebing-keraton.jpg'
-import dusunBambu from '../assets/images/wisata/dusun-bambu.jpg'
+// Import wisata images (Optimized)
+import tangkubanPerahu from '../assets/images/optimized/wisata/tangkuban-perahu.jpg'
+import kawahPutih from '../assets/images/optimized/wisata/kawah-putih.jpg'
+import farmHouse from '../assets/images/optimized/wisata/farm-house.jpg'
+import floatingMarket from '../assets/images/optimized/wisata/floating-market.jpg'
+import tebingKeraton from '../assets/images/optimized/wisata/tebing-keraton.jpg'
+import dusunBambu from '../assets/images/optimized/wisata/dusun-bambu.jpg'
 
 const places = [
     {
@@ -53,6 +53,30 @@ const places = [
         location: "Cisarua, Bandung Barat",
         rating: 4.5,
         image: dusunBambu,
+        category: "wisata"
+    },
+    {
+        id: 7,
+        name: "Orchid Forest Cikole",
+        location: "Lembang, Bandung Barat",
+        rating: 4.6,
+        image: tangkubanPerahu, // Reusing image for demo
+        category: "wisata"
+    },
+    {
+        id: 8,
+        name: "The Great Asia Africa",
+        location: "Lembang, Bandung Barat",
+        rating: 4.4,
+        image: farmHouse, // Reusing image for demo
+        category: "wisata"
+    },
+    {
+        id: 9,
+        name: "Ranca Upas",
+        location: "Ciwidey, Bandung Selatan",
+        rating: 4.7,
+        image: kawahPutih, // Reusing image for demo
         category: "wisata"
     }
 ]

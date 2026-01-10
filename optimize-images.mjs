@@ -14,27 +14,51 @@ if (!fs.existsSync(outputDir)) {
   fs.mkdirSync(outputDir, { recursive: true });
 }
 
-const images = ['bdg1.jpg', 'bdg2.jpg', 'bdg3.jpg'];
+// Ensure wisata optimized directory exists
+const wisataOutputDir = join(outputDir, 'wisata');
+if (!fs.existsSync(wisataOutputDir)) {
+  fs.mkdirSync(wisataOutputDir, { recursive: true });
+}
+
+const inputDirWisata = join(__dirname, 'src', 'assets', 'images', 'wisata');
 
 async function optimizeImages() {
   console.log('🖼️  Starting image optimization...\n');
 
-  for (const image of images) {
-    const inputPath = join(inputDir, image);
-    const outputPath = join(outputDir, image);
+  // Hero images
+  const heroImages = ['bdg1.jpg', 'bdg2.jpg', 'bdg3.jpg'];
+  
+  // Wisata images (get from directory)
+  let wisataImages = [];
+  try {
+     wisataImages = fs.readdirSync(inputDirWisata).filter(file => /\.(jpg|jpeg|png)$/i.test(file));
+  } catch (e) {
+     console.log("No wisata images found or directory missing");
+  }
+
+  const allImages = [
+      ...heroImages.map(Name => ({ Name, type: 'hero', inputDir, outputDir })),
+      ...wisataImages.map(Name => ({ Name, type: 'wisata', inputDir: inputDirWisata, outputDir: wisataOutputDir }))
+  ];
+
+  for (const { Name, type, inputDir, outputDir } of allImages) {
+    const inputPath = join(inputDir, Name);
+    // Change extension to .jpg for consistency if source is png
+    const outputName = Name.replace(/\.png$/i, '.jpg');
+    const outputPath = join(outputDir, outputName);
 
     try {
       const inputStats = fs.statSync(inputPath);
       const inputSizeKB = (inputStats.size / 1024).toFixed(2);
 
       await sharp(inputPath)
-        .resize(1920, 1080, { 
+        .resize(800, 600, { // Smaller size for cards
           fit: 'cover', 
           position: 'center' 
         })
         .jpeg({ 
           quality: 80, 
-          progressive: true 
+          mozjpeg: true
         })
         .toFile(outputPath);
 
@@ -42,12 +66,12 @@ async function optimizeImages() {
       const outputSizeKB = (outputStats.size / 1024).toFixed(2);
       const reduction = ((1 - outputStats.size / inputStats.size) * 100).toFixed(1);
 
-      console.log(`✅ ${image}`);
+      console.log(`✅ [${type}] ${Name} -> ${outputName}`);
       console.log(`   Before: ${inputSizeKB} KB`);
       console.log(`   After:  ${outputSizeKB} KB`);
       console.log(`   Saved:  ${reduction}%\n`);
     } catch (error) {
-      console.error(`❌ Error optimizing ${image}:`, error.message);
+      console.error(`❌ Error optimizing ${Name}:`, error.message);
     }
   }
 
