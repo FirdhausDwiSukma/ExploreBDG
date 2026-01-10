@@ -4,6 +4,7 @@
   line-height: 1.5;
   font-weight: 400;
   width: 100%;
+  overflow-x: hidden;
 
   /* ⬇️ DIUBAH: warna teks default jadi gelap */
   color: #0f172a;
@@ -37,6 +38,7 @@ body {
   min-width: 320px;
   min-height: 100vh;
   background-color: #ffffff;
+  overflow-x: hidden;
 }
 
 /* JUDUL */
@@ -801,7 +803,7 @@ button:focus-visible {
     width: 100%;
   }
 
-  .hero { min-height: calc(100vh - var(--header-height)); }
+  .hero { min-height: calc(105vh - var(--header-height)); }
   .hero-glass {
     padding: 20px;
     border-radius: 16px;
