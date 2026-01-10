@@ -563,9 +563,10 @@ button:focus-visible {
 
 @media (max-width: 600px) {
   .carousel-container {
-    padding: 0; /* Full edge-to-edge on mobile */
+    padding: 0; /* Full width */
     position: relative;
     width: 100%;
+    overflow: hidden;
   }
 
   /* NATIVE SCROLL MODE FOR MOBILE */
@@ -576,8 +577,9 @@ button:focus-visible {
     -webkit-overflow-scrolling: touch; /* Smooth scroll iOS */
     -ms-overflow-style: none; /* Hide scrollbar in IE & Edge */
     scrollbar-width: none; /* Hide scrollbar Firefox */
-    padding-bottom: 0;
+    padding: 0; /* No padding from viewport */
     touch-action: pan-x; /* Enable horizontal pan */
+    width: 100%;
   }
   
   .carousel-viewport::-webkit-scrollbar {
@@ -589,15 +591,15 @@ button:focus-visible {
     display: flex;
     width: max-content; /* Important: Content should be wider than container */
     transform: none !important; /* Disable JS transform */
-    padding: 0 16px; /* Start padding */
-    gap: 16px; /* Grid/Flex gap */
+    padding: 0 16px; /* Side padding for spacing */
+    gap: 12px; /* Gap between items */
     flex-wrap: nowrap;
   }
 
   .carousel-item {
     scroll-snap-align: center; /* Snap to center */
-    flex: 0 0 calc(85vw); /* Fixed width for items */
-    min-width: calc(85vw);
+    flex: 0 0 80vw; /* Smaller width - 80% of viewport */
+    min-width: 80vw;
     padding: 0; /* Reset internal padding */
   }
 
