@@ -1,28 +1,47 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 
 function Header({ title }) {
-    
+
     const [scrolled, setScrolled] = useState(false)
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-    
+    const menuRef = useRef(null)
+    const hamburgerRef = useRef(null)
+
     // handle scroll
     useEffect(() => {
         const handleScroll = () => {
-        setScrolled(window.scrollY > 10)
+            setScrolled(window.scrollY > 10)
         }
 
         window.addEventListener("scroll", handleScroll)
         return () => window.removeEventListener("scroll", handleScroll)
     }, [])
 
+    // handle click outside to close menu
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (mobileMenuOpen &&
+                menuRef.current &&
+                hamburgerRef.current &&
+                !menuRef.current.contains(event.target) &&
+                !hamburgerRef.current.contains(event.target)) {
+                setMobileMenuOpen(false)
+            }
+        }
+
+        document.addEventListener("mousedown", handleClickOutside)
+        return () => document.removeEventListener("mousedown", handleClickOutside)
+    }, [mobileMenuOpen])
+
     return (
         <header className={scrolled ? "header scrolled" : "header"}>
             <div className="brand">
                 <h1>{title}</h1>
             </div>
-        
-            <button 
-                className="hamburger" 
+
+            <button
+                ref={hamburgerRef}
+                className={`hamburger ${mobileMenuOpen ? 'active' : ''}`}
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                 aria-label="Toggle menu"
             >
@@ -30,8 +49,8 @@ function Header({ title }) {
                 <span></span>
                 <span></span>
             </button>
-        
-            <nav className={mobileMenuOpen ? "nav-open" : ""}>
+
+            <nav ref={menuRef} className={mobileMenuOpen ? "nav-open" : ""}>
                 <ul>
                     <li onClick={() => setMobileMenuOpen(false)}>Home</li>
                     <li onClick={() => setMobileMenuOpen(false)}>About</li>
