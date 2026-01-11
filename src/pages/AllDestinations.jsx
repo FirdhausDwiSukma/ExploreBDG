@@ -12,7 +12,7 @@ function AllDestinations() {
     }, [])
 
     return (
-        <section className="wisata-section" style={{ paddingTop: '100px' }}>
+        <section className="wisata-section" style={{ paddingTop: '60px' }}>
             <div className="container">
                 <div className="section-header">
                     <h2 className="section-title">Semua Destinasi</h2>
