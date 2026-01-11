@@ -1,6 +1,7 @@
 import WisataCard from './WisataCard'
 import places from '../data/places'
 import { useState, useEffect, useRef } from 'react'
+import { Link } from 'react-router-dom'
 
 function WisataSection() {
     // Filter only wisata category
@@ -102,6 +103,11 @@ function WisataSection() {
                 </div>
 
                 <div className="carousel-container">
+                    <div className="carousel-header-actions">
+                        <Link to="/destinasi" className="see-all-link">
+                            Lihat Semua <span>&rarr;</span>
+                        </Link>
+                    </div>
                     <div className="carousel-viewport" ref={viewportRef}>
                         <div className="carousel-track" style={{
                             transform: `translateX(${translateX}%)`,
