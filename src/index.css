@@ -6,7 +6,6 @@
   width: 100%;
   overflow-x: hidden;
 
-  /* ⬇️ DIUBAH: warna teks default jadi gelap */
   color: #0f172a;
   background-color: #ffffff;
 
@@ -16,14 +15,12 @@
   -moz-osx-font-smoothing: grayscale;
 } 
 
-/* RESET */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* LINK */
 a {
   font-weight: 500;
   color: #2563eb;
@@ -41,7 +38,6 @@ body {
   overflow-x: hidden;
 }
 
-/* JUDUL */
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
@@ -72,7 +68,6 @@ main {
   padding-top: 0;
 } 
 
-/* ⬇️ SHADOW SAAT SCROLL */
 .header.scrolled {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
@@ -91,8 +86,11 @@ main {
   gap: 5px;
   background: none;
   border: none;
+  border: none;
   cursor: pointer;
   padding: 0;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .hamburger span {
@@ -353,7 +351,7 @@ button:focus-visible {
 /* ================= WISATA SECTION ================= */
 
 .wisata-section {
-  padding: 80px 24px;
+  padding: 60px 24px;
   background-color: #f8fafc;
 }
 
@@ -463,7 +461,7 @@ button:focus-visible {
   display: flex;
   justify-content: center;
   gap: 8px;
-  margin-top: 20px;
+  margin-top: 8px;
   padding: 0 16px;
   flex-wrap: wrap;
 }
@@ -508,7 +506,7 @@ button:focus-visible {
 @media (max-width: 639px) {
   .carousel-dots {
     gap: 6px;
-    margin-top: 16px;
+    margin-top: 8px;
   }
 
   .dot {
@@ -525,7 +523,7 @@ button:focus-visible {
 @media (min-width: 640px) and (max-width: 1023px) {
   .carousel-dots {
     gap: 7px;
-    margin-top: 18px;
+    margin-top: 8px;
   }
 
   .dot {
@@ -542,7 +540,7 @@ button:focus-visible {
 @media (min-width: 1024px) {
   .carousel-dots {
     gap: 8px;
-    margin-top: 20px;
+    margin-top: 8px;
   }
 
   .dot {
