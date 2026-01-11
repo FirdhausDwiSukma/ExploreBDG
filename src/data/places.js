@@ -6,6 +6,14 @@ import floatingMarket from '../assets/images/optimized/wisata/floating-market.jp
 import tebingKeraton from '../assets/images/optimized/wisata/tebing-keraton.jpg'
 import dusunBambu from '../assets/images/optimized/wisata/dusun-bambu.jpg'
 
+// WebP Variants
+import tangkubanPerahuWebp from '../assets/images/optimized/wisata/tangkuban-perahu.webp'
+import kawahPutihWebp from '../assets/images/optimized/wisata/kawah-putih.webp'
+import farmHouseWebp from '../assets/images/optimized/wisata/farm-house.webp'
+import floatingMarketWebp from '../assets/images/optimized/wisata/floating-market.webp'
+import tebingKeratonWebp from '../assets/images/optimized/wisata/tebing-keraton.webp'
+import dusunBambuWebp from '../assets/images/optimized/wisata/dusun-bambu.webp'
+
 const places = [
     {
         id: 1,
@@ -13,6 +21,7 @@ const places = [
         location: "Lembang, Bandung Barat",
         rating: 4.5,
         image: tangkubanPerahu,
+        imageWebp: tangkubanPerahuWebp,
         category: "wisata"
     },
     {
@@ -21,6 +30,7 @@ const places = [
         location: "Ciwidey, Bandung Selatan",
         rating: 4.7,
         image: kawahPutih,
+        imageWebp: kawahPutihWebp,
         category: "wisata"
     },
     {
@@ -29,6 +39,7 @@ const places = [
         location: "Lembang, Bandung Barat",
         rating: 4.3,
         image: farmHouse,
+        imageWebp: farmHouseWebp,
         category: "wisata"
     },
     {
@@ -37,6 +48,7 @@ const places = [
         location: "Lembang, Bandung Barat",
         rating: 4.4,
         image: floatingMarket,
+        imageWebp: floatingMarketWebp,
         category: "wisata"
     },
     {
@@ -45,6 +57,7 @@ const places = [
         location: "Dago, Bandung",
         rating: 4.6,
         image: tebingKeraton,
+        imageWebp: tebingKeratonWebp,
         category: "wisata"
     },
     {
@@ -53,6 +66,7 @@ const places = [
         location: "Cisarua, Bandung Barat",
         rating: 4.5,
         image: dusunBambu,
+        imageWebp: dusunBambuWebp,
         category: "wisata"
     },
     {
@@ -61,6 +75,7 @@ const places = [
         location: "Lembang, Bandung Barat",
         rating: 4.6,
         image: tangkubanPerahu, // Reusing image for demo
+        imageWebp: tangkubanPerahuWebp,
         category: "wisata"
     },
     {
@@ -69,6 +84,7 @@ const places = [
         location: "Lembang, Bandung Barat",
         rating: 4.4,
         image: farmHouse, // Reusing image for demo
+        imageWebp: farmHouseWebp,
         category: "wisata"
     },
     {
@@ -77,6 +93,7 @@ const places = [
         location: "Ciwidey, Bandung Selatan",
         rating: 4.7,
         image: kawahPutih, // Reusing image for demo
+        imageWebp: kawahPutihWebp,
         category: "wisata"
     }
 ]

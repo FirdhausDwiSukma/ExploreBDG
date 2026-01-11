@@ -62,6 +62,20 @@ async function optimizeImages() {
         })
         .toFile(outputPath);
 
+      // Generate WebP version
+      const outputNameWebp = Name.replace(/\.(png|jpg|jpeg)$/i, '.webp');
+      const outputPathWebp = join(outputDir, outputNameWebp);
+
+      await sharp(inputPath)
+        .resize(800, 600, {
+          fit: 'cover',
+          position: 'center'
+        })
+        .webp({
+          quality: 80
+        })
+        .toFile(outputPathWebp);
+
       const outputStats = fs.statSync(outputPath);
       const outputSizeKB = (outputStats.size / 1024).toFixed(2);
       const reduction = ((1 - outputStats.size / inputStats.size) * 100).toFixed(1);

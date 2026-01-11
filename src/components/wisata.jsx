@@ -41,19 +41,19 @@ function WisataSection() {
 
         const handleScroll = () => {
             isScrollingRef.current = true
-            
+
             const scrollLeft = viewport.scrollLeft
             const scrollWidth = viewport.scrollWidth
             const clientWidth = viewport.clientWidth
             const totalScrollWidth = scrollWidth - clientWidth
-            
+
             // Calculate index based on scroll position ratio
             let newIndex = 0
             if (totalScrollWidth > 0) {
                 const scrollRatio = scrollLeft / totalScrollWidth
                 newIndex = Math.round(scrollRatio * (wisataPlaces.length - 1))
             }
-            
+
             newIndex = Math.max(0, Math.min(newIndex, wisataPlaces.length - itemsPerSlide))
             setCurrentIndex(newIndex)
 
@@ -114,6 +114,7 @@ function WisataSection() {
                                         location={place.location}
                                         rating={place.rating}
                                         image={place.image}
+                                        imageWebp={place.imageWebp}
                                         onClick={() => alert(`Mengunjungi ${place.name}... (Fitur Detail Segera Hadir!)`)}
                                     />
                                 </div>
