@@ -4,8 +4,8 @@
   line-height: 1.5;
   font-weight: 400;
   width: 100%;
+  overflow-x: hidden;
 
-  /* ⬇️ DIUBAH: warna teks default jadi gelap */
   color: #0f172a;
   background-color: #ffffff;
 
@@ -15,14 +15,12 @@
   -moz-osx-font-smoothing: grayscale;
 } 
 
-/* RESET */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* LINK */
 a {
   font-weight: 500;
   color: #2563eb;
@@ -37,9 +35,9 @@ body {
   min-width: 320px;
   min-height: 100vh;
   background-color: #ffffff;
+  overflow-x: hidden;
 }
 
-/* JUDUL */
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
@@ -70,7 +68,6 @@ main {
   padding-top: 0;
 } 
 
-/* ⬇️ SHADOW SAAT SCROLL */
 .header.scrolled {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
@@ -89,8 +86,11 @@ main {
   gap: 5px;
   background: none;
   border: none;
+  border: none;
   cursor: pointer;
   padding: 0;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .hamburger span {
@@ -134,7 +134,13 @@ nav li {
   transition: color 0.2s ease;
 }
 
-nav li:hover {
+nav li a {
+  color: inherit;
+  text-decoration: none;
+}
+
+nav li:hover,
+nav li:hover a {
   color: #CFF432;
 } 
 
@@ -348,6 +354,413 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+/* ================= WISATA SECTION ================= */
+
+.wisata-section {
+  padding: 60px 24px;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 20px; 
+}
+
+.section-title {
+  font-size: 32px;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 12px;
+}
+
+.carousel-header-actions {
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 12px;
+  margin-bottom: -18px;
+}
+
+.see-all-link {
+  font-size: 14px;
+  font-weight: 600;
+  color: #000000;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  transition: transform 0.2s ease;
+  text-decoration: none; /* Ensure no underline */
+}
+
+.see-all-link:hover {
+  transform: translateX(4px);
+  color: #CFF432;
+}
+
+.section-desc {
+  font-size: 16px;
+  color: #64748b;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Carousel Styles */
+.carousel-container {
+  position: relative;
+  width: 100%;
+  max-width: 100%; /* Full Width */
+  margin: 0 auto;
+  padding: 12px 0; /* Remove side padding to go full width */
+}
+
+/* Viewport handles the masking */
+.carousel-viewport {
+  overflow: hidden;
+  width: 100%;
+  padding: 40px 0; /* Huge breathing room for hover & shadow */
+}
+
+.carousel-track {
+  display: flex;
+  transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+  width: 100%;
+}
+
+.carousel-item {
+  flex-shrink: 0;
+  padding: 0 12px;
+  cursor: pointer; /* Explicit pointer cursor for the whole item area */
+  transition: all 0.3s ease;
+}
+
+.carousel-item:hover .wisata-card,
+.carousel-item:hover .wisata-card img {
+  pointer-events: auto !important;
+}
+
+/* Nav Buttons - Positioned relative to IMAGE height (240px) */
+.nav-button {
+  position: absolute;
+  /* Top padding (40px) + Half Image Height (120px) = 160px */
+  top: 160px; 
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: white;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 20;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  color: #0f172a;
+}
+
+.nav-button:hover:not(:disabled) {
+  background: #0f172a;
+  color: white;
+  border-color: #0f172a;
+  transform: translateY(-50%) scale(1.1);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.nav-button:disabled {
+  opacity: 0; /* Hide completely if disabled for cleaner look, or 0.3 */
+  pointer-events: none;
+}
+
+.nav-button.prev {
+  left: 16px; /* Offset from screen edge */
+}
+
+.nav-button.next {
+  right: 16px; /* Offset from screen edge */
+}
+
+/* Dots Indicator */
+.carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 8px;
+  padding: 0 16px;
+  flex-wrap: wrap;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #cbd5e1;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+  flex-shrink: 0;
+}
+
+.dot:hover:not(:disabled) {
+  background: #CFF432;
+  transform: scale(1.2);
+}
+
+.dot:focus {
+  outline: none;
+}
+
+.dot:focus-visible {
+  outline: none;
+}
+
+.dot:disabled {
+  cursor: default;
+}
+
+.dot.active {
+  background: #CFF432;
+  width: 24px;
+  border-radius: 5px;
+}
+
+/* Mobile: 9 dots (1 per slide) */
+@media (max-width: 639px) {
+  .carousel-dots {
+    gap: 6px;
+    margin-top: 8px;
+  }
+
+  .dot {
+    width: 8px;
+    height: 8px;
+  }
+
+  .dot.active {
+    width: 20px;
+  }
+}
+
+/* Tablet: 8 dots (2 per slide) */
+@media (min-width: 640px) and (max-width: 1023px) {
+  .carousel-dots {
+    gap: 7px;
+    margin-top: 8px;
+  }
+
+  .dot {
+    width: 9px;
+    height: 9px;
+  }
+
+  .dot.active {
+    width: 22px;
+  }
+}
+
+/* Desktop: 7 dots (3 per slide) */
+@media (min-width: 1024px) {
+  .carousel-dots {
+    gap: 8px;
+    margin-top: 8px;
+  }
+
+  .dot {
+    width: 10px;
+    height: 10px;
+  }
+
+  .dot.active {
+    width: 24px;
+  }
+}
+
+/* Responsive Adjustments */
+@media (max-width: 900px) {
+  .nav-button {
+     /* Mobile/Tablet image might be different size? Styles say 240px fixed for card-image-wrapper */
+     top: 130px; 
+  }
+}
+
+@media (max-width: 600px) {
+  .carousel-container {
+    padding: 0; /* Full width */
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  /* NATIVE SCROLL MODE FOR MOBILE */
+  .carousel-viewport {
+    overflow-x: auto; /* Enable Scroll */
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory; /* Snap effect */
+    -webkit-overflow-scrolling: touch; /* Smooth scroll iOS */
+    -ms-overflow-style: none; /* Hide scrollbar in IE & Edge */
+    scrollbar-width: none; /* Hide scrollbar Firefox */
+    scrollbar-width: none; /* Hide scrollbar Firefox */
+    padding: 24px 0; /* Add padding to prevent clipping on hover */
+    touch-action: pan-x; /* Enable horizontal pan */
+    width: 100%;
+  }
+  
+  .carousel-viewport::-webkit-scrollbar {
+    display: none; /* Hide scrollbar Chrome/Safari */
+  }
+
+  /* Disable Transform logic on mobile, rely on native scroll */
+  .carousel-track {
+    display: flex;
+    width: max-content; /* Important: Content should be wider than container */
+    transform: none !important; /* Disable JS transform */
+    padding: 0 16px; /* Side padding for spacing */
+    gap: 12px; /* Gap between items */
+    flex-wrap: nowrap;
+  }
+
+  .carousel-item {
+    scroll-snap-align: center; /* Snap to center */
+    flex: 0 0 80vw; /* Smaller width - 80% of viewport */
+    min-width: 80vw;
+    padding: 0; /* Reset internal padding */
+  }
+
+  /* Hide buttons completely */
+  .nav-button {
+    display: none;
+  }
+  
+  .card-image-wrapper {
+      height: 200px;
+  }
+
+  /* Mobile dots styling */
+  .carousel-dots {
+    gap: 6px;
+    margin-top: 16px;
+    padding: 0 16px;
+  }
+
+  .dot {
+    width: 8px;
+    height: 8px;
+  }
+
+  .dot.active {
+    width: 20px;
+  }
+}
+
+/* Wisata Card */
+.wisata-card {
+  background-color: #ffffff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease !important;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  pointer-events: auto;
+}
+
+.wisata-card:hover,
+.wisata-card.hovered,
+.wisata-card:focus-within,
+.wisata-card:active {
+  transform: translateY(-8px) !important;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* Card Image */
+.card-image-wrapper {
+  position: relative;
+  width: 100%;
+  height: 240px;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.card-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+  pointer-events: none;
+}
+
+.card-image-wrapper picture {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.wisata-card:hover .card-image-wrapper img,
+.wisata-card.hovered .card-image-wrapper img {
+  transform: scale(1.1) !important;
+}
+
+/* Rating Badge */
+.rating-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 6px 12px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #0f172a;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.rating-badge .star {
+  font-size: 16px;
+}
+
+.rating-value {
+  color: #0f172a;
+}
+
+/* Card Content */
+.card-content {
+  padding: 20px;
+}
+
+.card-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #0f172a;
+  margin-bottom: 8px;
+  line-height: 1.4;
+  text-align: center;
+}
+
+.card-location {
+  font-size: 14px;
+  color: #64748b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+.location-icon {
+  font-size: 14px;
+}
+
 /* Responsive: tablet and mobile adjustments */
 @media (max-width: 900px) {
   :root { --header-height: 64px; }
@@ -369,6 +782,25 @@ button:focus-visible {
   .hero-left p { font-size: 16px; max-width: 100%; }
   .hero-right { display: none; }
   .hero-location-mobile { display: block; }
+
+  /* Wisata section responsive */
+  .wisata-section { padding: 60px 24px; }
+  .section-title { font-size: 28px; }
+  .section-desc { font-size: 15px; }
+  
+  .see-all-link {
+    position: relative;
+    right: auto;
+    top: auto;
+    margin-bottom: 16px;
+    align-self: flex-end; /* Move to right */
+    order: -1; /* Put it above title optionally, or adjust structure */
+  }
+
+  .section-header {
+     align-items: center;
+  }
+  .wisata-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
 }
 
 @media (max-width: 600px) {
@@ -417,7 +849,7 @@ button:focus-visible {
     width: 100%;
   }
 
-  .hero { min-height: calc(100vh - var(--header-height)); }
+  .hero { min-height: calc(105vh - var(--header-height)); }
   .hero-glass {
     padding: 20px;
     border-radius: 16px;
@@ -431,6 +863,24 @@ button:focus-visible {
   .btn-primary, .btn-secondary { padding: 8px 14px; font-size: 13px; }
   .hero-right { display: none; }
   .hero-location-mobile { display: block; font-size: 14px; margin-bottom: 12px; }
+
+  /* Wisata section mobile */
+  .wisata-section { 
+    padding: 40px 0; /* Remove horizontal padding for full width */
+  }
+  
+  .section-title, .section-desc {
+    padding: 0 16px; /* Restore padding for text */
+  }
+
+  .carousel-dots {
+    padding: 0 16px;
+  }
+  
+  .section-title { font-size: 24px; }
+  .section-desc { font-size: 14px; }
+  .wisata-grid { grid-template-columns: 1fr; gap: 16px; }
+  .card-image-wrapper { height: 200px; }
 }
 
 /* LIGHT MODE (tetap aman) */

@@ -1,4 +1,5 @@
 import { useEffect, useState, useRef } from 'react'
+import { Link } from 'react-router-dom'
 
 function Header({ title }) {
 
@@ -52,7 +53,9 @@ function Header({ title }) {
 
             <nav ref={menuRef} className={mobileMenuOpen ? "nav-open" : ""}>
                 <ul>
-                    <li onClick={() => setMobileMenuOpen(false)}>Home</li>
+                    <li onClick={() => setMobileMenuOpen(false)}>
+                        <Link to="/">Home</Link>
+                    </li>
                     <li onClick={() => setMobileMenuOpen(false)}>About</li>
                     <li onClick={() => setMobileMenuOpen(false)}>Help</li>
                 </ul>
