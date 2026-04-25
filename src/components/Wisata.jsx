@@ -113,8 +113,7 @@ function WisataSection() {
                     </div>
                     <div className="carousel-viewport" ref={viewportRef}>
                         <div className="carousel-track" style={{
-                            transform: `translateX(${translateX}%)`,
-                            gridTemplateColumns: `repeat(${wisataPlaces.length}, ${100 / itemsPerSlide}%)`
+                            transform: `translateX(${translateX}%)`
                         }}>
                             {wisataPlaces.map(place => (
                                 <div className="carousel-item" key={place.id} style={{ width: `${100 / itemsPerSlide}%` }}>

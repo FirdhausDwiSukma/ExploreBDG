@@ -20,7 +20,10 @@ const FILTER_OPTIONS = [
 ]
 
 function AllDestinations() {
-    const wisataPlaces = places.filter(place => place.category === 'wisata')
+    const wisataPlaces = useMemo(
+        () => places.filter(place => place.category === 'wisata'),
+        []
+    )
 
     const [selectedPlace, setSelectedPlace] = useState(null)
     const [search, setSearch] = useState('')

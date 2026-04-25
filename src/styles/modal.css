@@ -169,3 +169,28 @@
   font-size: 15px;
   max-width: 360px;
 }
+
+/* ── Modal responsive ── */
+@media (max-width: 639px) {
+  .modal-backdrop {
+    padding: 16px;
+    align-items: flex-end; /* slide up from bottom on mobile */
+  }
+
+  .modal-content {
+    max-width: 100%;
+    border-radius: 20px 20px 0 0;
+    max-height: 85vh;
+  }
+
+  .modal-image-wrapper {
+    height: 200px;
+    border-radius: 20px 20px 0 0;
+  }
+
+  .modal-body {
+    padding: 20px 16px 32px;
+  }
+
+  .modal-title { font-size: 20px; }
+}

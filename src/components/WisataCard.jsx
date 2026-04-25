@@ -4,14 +4,11 @@ import { IconPin, IconStar } from './icons'
 
 function WisataCard({ name, location, rating, image, imageWebp, comingSoon, onClick }) {
     const [isLoaded, setIsLoaded] = useState(false)
-    const [isHovered, setIsHovered] = useState(false)
 
     return (
         <div
-            className={`wisata-card ${isHovered ? 'hovered' : ''}`}
+            className="wisata-card"
             onClick={onClick}
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
             role="button"
             tabIndex={0}
             onKeyDown={(e) => e.key === 'Enter' && onClick?.()}

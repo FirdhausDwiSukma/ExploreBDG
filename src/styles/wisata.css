@@ -33,7 +33,7 @@
   display: flex;
   justify-content: flex-end;
   padding-right: 12px;
-  margin-bottom: -18px;
+  margin-bottom: 4px;
 }
 
 .see-all-link {
@@ -172,8 +172,8 @@
   -webkit-user-select: none;
 }
 
+/* Wisata card hover — pure CSS, no JS state needed */
 .wisata-card:hover,
-.wisata-card.hovered,
 .wisata-card:focus-within {
   transform: translateY(-8px);
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
@@ -207,8 +207,7 @@
   pointer-events: none;
 }
 
-.wisata-card:hover .card-image-wrapper img,
-.wisata-card.hovered .card-image-wrapper img {
+.wisata-card:hover .card-image-wrapper img {
   transform: scale(1.1);
 }
 
@@ -287,48 +286,60 @@
 /* Mobile (< 640px) */
 @media (max-width: 639px) {
   .wisata-section {
-    padding: 40px 0;
+    padding: 40px 0 32px;
   }
 
   .section-title,
   .section-desc {
-    padding: 0 16px;
+    padding: 0 20px;
   }
 
   .section-title { font-size: 24px; }
   .section-desc { font-size: 14px; }
 
+  /* "Lihat Semua" di mobile — rata kanan dengan padding */
+  .carousel-header-actions {
+    padding: 0 20px;
+    margin-bottom: 12px;
+  }
+
   /* Native scroll carousel on mobile */
   .carousel-container {
     padding: 0;
-    overflow: hidden;
+    /* Biarkan shadow card terlihat */
+    overflow: visible;
   }
 
   .carousel-viewport {
     overflow-x: auto;
-    overflow-y: hidden;
+    overflow-y: visible;
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
     -ms-overflow-style: none;
     scrollbar-width: none;
-    padding: 24px 0;
+    /* Padding atas-bawah untuk shadow, kiri-kanan untuk peek card berikutnya */
+    padding: 12px 0 20px;
     touch-action: pan-x;
   }
 
   .carousel-viewport::-webkit-scrollbar { display: none; }
 
   .carousel-track {
+    display: flex;
     width: max-content;
     transform: none !important;
-    padding: 0 16px;
-    gap: 12px;
+    /* Padding kiri = 20px, kanan = 20px agar card pertama & terakhir tidak mepet */
+    padding: 0 20px;
+    gap: 16px;
     flex-wrap: nowrap;
+    align-items: stretch;
   }
 
   .carousel-item {
-    scroll-snap-align: center;
-    flex: 0 0 80vw;
-    min-width: 80vw;
+    scroll-snap-align: start;
+    /* 100vw - 40px padding - 20px peek card berikutnya */
+    flex: 0 0 calc(100vw - 60px);
+    min-width: calc(100vw - 60px);
     padding: 0;
   }
 
@@ -336,12 +347,6 @@
 
   .card-image-wrapper { height: 200px; }
 
-  .carousel-dots {
-    gap: 6px;
-    margin-top: 16px;
-    padding: 0 16px;
-  }
-
-  .dot { width: 8px; height: 8px; }
-  .dot.active { width: 20px; }
+  /* Sembunyikan dots di mobile — native scroll sudah cukup */
+  .carousel-dots { display: none; }
 }
