@@ -1,0 +1,83 @@
+/* ================= BASE / RESET ================= */
+
+:root {
+  --header-height: 64px;
+  --bp-mobile: 640px;
+  --bp-desktop: 1024px;
+
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color: #0f172a;
+  background-color: #ffffff;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  background-color: #ffffff;
+  overflow-x: hidden;
+}
+
+/* h1 inside header brand only — don't override page headings */
+header h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+a {
+  font-weight: 500;
+  color: #2563eb;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #1d4ed8;
+}
+
+/* offset main content so fixed header doesn't overlap */
+main {
+  padding-top: 0;
+}
+
+/* Skip to content link — visible only on focus for keyboard users */
+.skip-to-content {
+  position: absolute;
+  top: -100%;
+  left: 16px;
+  z-index: 9999;
+  background: #0f172a;
+  color: #CFF432;
+  padding: 8px 16px;
+  border-radius: 0 0 8px 8px;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: top 0.2s ease;
+}
+
+.skip-to-content:focus {
+  top: 0;
+  outline: 2px solid #CFF432;
+  outline-offset: 2px;
+}
+
+/* LIGHT MODE */
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #0f172a;
+    background-color: #ffffff;
+  }
+}

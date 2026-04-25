@@ -74,27 +74,30 @@ const places = [
         name: "Orchid Forest Cikole",
         location: "Lembang, Bandung Barat",
         rating: 4.6,
-        image: tangkubanPerahu, // Reusing image for demo
+        image: tangkubanPerahu,
         imageWebp: tangkubanPerahuWebp,
-        category: "wisata"
+        category: "wisata",
+        comingSoon: true
     },
     {
         id: 8,
         name: "The Great Asia Africa",
         location: "Lembang, Bandung Barat",
         rating: 4.4,
-        image: farmHouse, // Reusing image for demo
+        image: farmHouse,
         imageWebp: farmHouseWebp,
-        category: "wisata"
+        category: "wisata",
+        comingSoon: true
     },
     {
         id: 9,
         name: "Ranca Upas",
         location: "Ciwidey, Bandung Selatan",
         rating: 4.7,
-        image: kawahPutih, // Reusing image for demo
+        image: kawahPutih,
         imageWebp: kawahPutihWebp,
-        category: "wisata"
+        category: "wisata",
+        comingSoon: true
     }
 ]
 

@@ -37,7 +37,7 @@ function Header({ title }) {
     return (
         <header className={scrolled ? "header scrolled" : "header"}>
             <div className="brand">
-                <h1>{title}</h1>
+                <Link to="/" aria-label="Kembali ke beranda">{title}</Link>
             </div>
 
             <button
