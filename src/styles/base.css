@@ -31,7 +31,8 @@ body {
   overflow-x: hidden;
 }
 
-h1 {
+/* h1 inside header brand only — don't override page headings */
+header h1 {
   font-size: 3.2em;
   line-height: 1.1;
 }
