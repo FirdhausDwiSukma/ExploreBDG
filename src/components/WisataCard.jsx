@@ -1,7 +1,8 @@
 import PropTypes from 'prop-types'
 import { useState } from 'react'
+import { IconPin, IconStar } from './icons'
 
-function WisataCard({ name, location, rating, image, imageWebp, onClick }) {
+function WisataCard({ name, location, rating, image, imageWebp, comingSoon, onClick }) {
     const [isLoaded, setIsLoaded] = useState(false)
     const [isHovered, setIsHovered] = useState(false)
 
@@ -11,10 +12,14 @@ function WisataCard({ name, location, rating, image, imageWebp, onClick }) {
             onClick={onClick}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
+            role="button"
+            tabIndex={0}
+            onKeyDown={(e) => e.key === 'Enter' && onClick?.()}
+            aria-label={`Lihat detail ${name}`}
         >
             <div className="card-image-wrapper">
                 <picture>
-                    <source srcSet={imageWebp} type="image/webp" />
+                    {imageWebp && <source srcSet={imageWebp} type="image/webp" />}
                     <img
                         src={image}
                         alt={name}
@@ -28,16 +33,27 @@ function WisataCard({ name, location, rating, image, imageWebp, onClick }) {
                         }}
                     />
                 </picture>
-                {!isLoaded && <div className="skeleton-loader" style={{ position: 'absolute', inset: 0, background: '#f0f0f0' }} />}
-                <div className="rating-badge">
-                    <span className="star">⭐</span>
+                {!isLoaded && (
+                    <div
+                        className="skeleton-loader"
+                        style={{ position: 'absolute', inset: 0, background: '#f0f0f0' }}
+                        aria-hidden="true"
+                    />
+                )}
+                <div className="rating-badge" aria-label={`Rating ${rating}`}>
+                    <IconStar size={16} />
                     <span className="rating-value">{rating}</span>
                 </div>
+                {comingSoon && (
+                    <div className="coming-soon-badge" aria-label="Segera hadir">
+                        Segera Hadir
+                    </div>
+                )}
             </div>
             <div className="card-content">
                 <h3 className="card-title">{name}</h3>
                 <p className="card-location">
-                    <span className="location-icon">📍</span>
+                    <IconPin size={14} />
                     {location}
                 </p>
             </div>
@@ -50,7 +66,9 @@ WisataCard.propTypes = {
     location: PropTypes.string.isRequired,
     rating: PropTypes.number.isRequired,
     image: PropTypes.string.isRequired,
-    imageWebp: PropTypes.string
+    imageWebp: PropTypes.string,
+    comingSoon: PropTypes.bool,
+    onClick: PropTypes.func,
 }
 
 export default WisataCard

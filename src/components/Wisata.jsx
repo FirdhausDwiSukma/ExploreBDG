@@ -2,6 +2,7 @@ import WisataCard from './WisataCard'
 import places from '../data/places'
 import { useState, useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
+import DestinationModal from './DestinationModal'
 
 function WisataSection() {
     // Filter only wisata category
@@ -11,10 +12,11 @@ function WisataSection() {
     const [currentIndex, setCurrentIndex] = useState(0)
     const [itemsPerSlide, setItemsPerSlide] = useState(3)
     const [isMobile, setIsMobile] = useState(false)
+    const [selectedPlace, setSelectedPlace] = useState(null)
     const viewportRef = useRef(null)
     const isScrollingRef = useRef(false)
 
-    // Responsive items per slide
+    // Responsive items per slide — debounced to avoid excessive re-renders on resize
     useEffect(() => {
         const handleResize = () => {
             const width = window.innerWidth
@@ -30,9 +32,19 @@ function WisataSection() {
             }
         }
 
-        handleResize() // Init
-        window.addEventListener('resize', handleResize)
-        return () => window.removeEventListener('resize', handleResize)
+        handleResize() // Init on mount
+
+        let debounceTimer
+        const debouncedResize = () => {
+            clearTimeout(debounceTimer)
+            debounceTimer = setTimeout(handleResize, 150)
+        }
+
+        window.addEventListener('resize', debouncedResize)
+        return () => {
+            window.removeEventListener('resize', debouncedResize)
+            clearTimeout(debounceTimer)
+        }
     }, [])
 
     // Handle scroll on mobile to update dots
@@ -67,15 +79,6 @@ function WisataSection() {
         viewport.addEventListener('scroll', handleScroll, { passive: true })
         return () => viewport.removeEventListener('scroll', handleScroll)
     }, [isMobile, wisataPlaces.length, itemsPerSlide])
-
-    // Handle dots click to scroll on desktop only
-    useEffect(() => {
-        const viewport = viewportRef.current
-        if (!viewport || isMobile) return  // Only for desktop, not mobile
-
-        // For desktop, no scroll effect needed - carousel uses transform
-        // Dots click is handled by onClick handler
-    }, [isMobile])
 
     const nextSlide = () => {
         setCurrentIndex(prev =>
@@ -121,7 +124,8 @@ function WisataSection() {
                                         rating={place.rating}
                                         image={place.image}
                                         imageWebp={place.imageWebp}
-                                        onClick={() => alert(`Mengunjungi ${place.name}... (Fitur Detail Segera Hadir!)`)}
+                                        comingSoon={place.comingSoon}
+                                        onClick={() => setSelectedPlace(place)}
                                     />
                                 </div>
                             ))}
@@ -160,6 +164,13 @@ function WisataSection() {
                     </div>
                 </div>
             </div>
+
+            {selectedPlace && (
+                <DestinationModal
+                    place={selectedPlace}
+                    onClose={() => setSelectedPlace(null)}
+                />
+            )}
         </section>
     )
 }
