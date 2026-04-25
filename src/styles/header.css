@@ -28,6 +28,11 @@ header {
   color: #0f172a;
 }
 
+.brand a {
+  color: inherit;
+  text-decoration: none;
+}
+
 /* HAMBURGER BUTTON - hidden on desktop */
 .hamburger {
   display: none;
